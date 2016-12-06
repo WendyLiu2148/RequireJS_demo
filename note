@@ -1,0 +1,27 @@
+网址：https://segmentfault.com/a/1190000002403806
+
+为什么要使用RequireJS: (１>JS会阻止页面的渲染【弹框时页面的内容不加载】 2>引入很多个js时，一个个在页面引入太难看)
+
+1.下载RequireJS文件
+２．在页面引入requirejs
+3.在页面引入main.js
+
+入口文件main.js 依赖　test.js(deps: ['index'])  --> index文件注入了test1，怎可以将test1关联起来了。
+test1就像是普通的js一样，在test1中还可以　依靠路径引入其他的模块，如：test2
+在这里面 test就是　比较公用的js了
+
+bowerPath = "vendor/bower/angular/";
+require.config({
+	baseUrl: '',
+	paths: {
+		"jquery": bowerPath + "jquery.min"
+	},
+	deps: ['index']
+});
+
+main.js中的参数理解：
+baseUrl ://表示的main.js和index.js所在的位置
+path　：／／是个对象，定义要引入js的别名和路径
+shim: //没有使用define()来声明的依赖关系
+deps: //要加载的一个依赖数组
+urlArgs: // RequireJS获取资源时附加在URL后面的额外的query参数  , 获取url后面的参数
